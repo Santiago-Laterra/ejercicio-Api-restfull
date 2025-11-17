@@ -62,12 +62,43 @@ const addBooks = async (req: Request, res: Response) => {
 
   } catch (e) {
     const error = e as Error
-    res.status(400).json({ success: false, error: error.message })
+    res.status(500).json({ success: false, error: error.message })
   }
 }
 
 const updateBooks = async (req: Request, res: Response) => {
+  const id = req.params.id
+  const body = req.body
 
+
+  try {
+
+    const { title, author, publishedYear, genre, available } = body
+
+    //validamos si el id es correcto
+    if (!Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: "ID invalido" })
+    }
+
+    if (!title || !author || !publishedYear || !genre || !available) {
+      return res.status(400).json({ success: false, message: "Datos Invalidos" })
+    }
+
+    const update = { title, author, publishedYear, genre, available }
+
+    const book = await Book.findByIdAndUpdate(id, update, { new: true })
+
+    //vemos si el item se encontro
+    if (!book) {
+      res.status(404).json({ success: false, message: "No se encontro" })
+    }
+
+    res.json({ success: true, data: book })
+
+  } catch (e) {
+    const error = e as Error
+    res.status(500).json({ success: false, error: error.message })
+  }
 }
 
-export default { getBooks, getBooksById, addBooks }
+export default { getBooks, getBooksById, addBooks, updateBooks }

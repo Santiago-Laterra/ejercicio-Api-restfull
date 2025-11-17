@@ -21,7 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 app.get("/books", controller.getBooks)
 app.get("/books/:id", controller.getBooksById)
 app.post("/books", controller.addBooks)
-app.patch("/books/:id")
+app.patch("/books/:id", controller.updateBooks)
 
 
 app.use((__: Request, res: Response) => {

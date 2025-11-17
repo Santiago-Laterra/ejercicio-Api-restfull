@@ -42,5 +42,28 @@ const getBooksById = async (req: Request, res: Response) => {
 
 }
 
+const addBooks = async (req: Request, res: Response) => {
+  const body = req.body
 
-export default { getBooks, getBooksById }
+  try {
+    //desestructuramos el cuerpo de la peticion
+    const { title, author, publishedYear, genre, available } = body
+
+    //vemos si estan vacios
+    if (!title || !author || !publishedYear || !genre || !available) {
+      return res.status(400).json({ success: false, message: "Datos Invalidos" })
+    }
+
+    //si estan bien cremos un nuevo objeto book
+    const newBook = new Book({ title, author, publishedYear, genre, available })
+
+    newBook.save()
+    res.json({ success: true, data: newBook })
+
+  } catch (e) {
+    const error = e as Error
+    res.status(400).json({ success: false, error: error.message })
+  }
+}
+
+export default { getBooks, getBooksById, addBooks }

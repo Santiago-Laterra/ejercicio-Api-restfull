@@ -20,7 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 //CRUD
 app.get("/books", controller.getBooks)
 app.get("/books:id", controller.getBooksById)
-
+app.post("/books", controller.addBooks)
 
 
 

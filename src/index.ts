@@ -19,12 +19,13 @@ app.get("/", (req: Request, res: Response) => {
 
 //CRUD
 app.get("/books", controller.getBooks)
+app.get("/books:id", controller.getBooksById)
 
 
 
 
 app.use((__: Request, res: Response) => {
-  res.status(404).json({ success: false, error: "El recurso no se encuentra" })
+  res.status(404).json({ success: false, message: "El recurso no se encuentra" })
 })
 
 app.listen(PORT, () => {

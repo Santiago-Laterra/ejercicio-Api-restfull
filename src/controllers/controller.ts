@@ -66,4 +66,8 @@ const addBooks = async (req: Request, res: Response) => {
   }
 }
 
+const updateBooks = async (req: Request, res: Response) => {
+
+}
+
 export default { getBooks, getBooksById, addBooks }

@@ -108,7 +108,7 @@ const deleteBooks = async (req: Request, res: Response) => {
   try {
 
     //validamos el id
-    if (Types.ObjectId.isValid(id)) {
+    if (!Types.ObjectId.isValid(id)) {
       return res.status(400).json({ success: false, message: "ID invalido" })
     }
 

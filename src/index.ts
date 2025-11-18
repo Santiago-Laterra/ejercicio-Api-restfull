@@ -22,6 +22,7 @@ app.get("/books", controller.getBooks)
 app.get("/books/:id", controller.getBooksById)
 app.post("/books", controller.addBooks)
 app.patch("/books/:id", controller.updateBooks)
+app.delete("/books/:id")
 
 
 app.use((__: Request, res: Response) => {

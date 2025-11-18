@@ -101,4 +101,31 @@ const updateBooks = async (req: Request, res: Response) => {
   }
 }
 
-export default { getBooks, getBooksById, addBooks, updateBooks }
+const deleteBooks = async (req: Request, res: Response) => {
+
+  const id = req.params.id
+
+  try {
+
+    //validamos el id
+    if (Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: "ID invalido" })
+    }
+
+    //buscamos el book y lo borramos
+    const book = await Book.findByIdAndDelete(id)
+
+    //validamos si lo encontro
+    if (!book) {
+      res.status(404).json({ success: false, message: "No se encontro" })
+    }
+
+    res.json({ success: true, data: book })
+
+  } catch (e) {
+    const error = e as Error
+    res.status(400).json({ success: false, error: error.message })
+  }
+}
+
+export default { getBooks, getBooksById, addBooks, updateBooks, deleteBooks }

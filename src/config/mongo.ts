@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const connectDB = async () => {
-  const URI_DB = process.env.URI_DB!
+  const URI_DB = process.env.URI_DB
   try {
     await connect(URI_DB)
 

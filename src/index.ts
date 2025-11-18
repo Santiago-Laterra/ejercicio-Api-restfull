@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 import bookRoutes from "./routes/bookRoutes"
 dotenv.config()
 
-const PORT = process.env.PORT!
+const PORT = process.env.PORT
 
 
 const app = express()
